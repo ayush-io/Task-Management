@@ -1,0 +1,281 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: monospace;
+  background: rgb(255, 216, 0);
+  background: linear-gradient(
+    45deg,
+    rgba(255, 216, 0, 1) 0%,
+    rgba(242, 95, 35, 1) 100%
+  );
+}
+
+.frame {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(245, 228, 171);
+  flex-direction: column;
+  width: 90%;
+  height: 90%;
+}
+
+.list-container {
+  height: 100%;
+  width: 100%;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 7px 7px 9px rgb(0, 0, 0, 0.3);
+}
+
+.header {
+  top: 0;
+  width: 100%;
+  background-color: rgb(228, 103, 66);
+  text-align: center;
+  padding: 10px 0;
+  text-shadow: 2px 2px 5px black;
+}
+
+.day {
+  line-height: 40px;
+  font-size: xx-large;
+  font-weight: bold;
+  color: aliceblue;
+}
+
+.date {
+  font-size: large;
+  color: aliceblue;
+}
+
+.headline {
+  text-align: center;
+  color: gray;
+  margin-top: 5px;
+}
+
+.list {
+  list-style: none;
+  margin: auto;
+  width: 100%;
+  position: relative;
+}
+
+.list-item {
+  padding: 20px 35px;
+  display: flex;
+  border-bottom: 1px solid gray;
+}
+
+.task-details {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  .text {
+    font-size: 1.1rem;
+    transition: all 0.1s;
+  }
+  .description {
+    width: 90%;
+    transition: all 0.1s;
+  }
+}
+
+.action-btns {
+  display: flex;
+  max-height: 30px;
+  gap: 15px;
+  button {
+    padding: 5px;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    font-size: 1.1rem;
+  }
+  button:hover {
+    color: rgb(86, 86, 86);
+  }
+}
+
+.checkbox {
+  display: none;
+}
+
+.check {
+  height: 20px;
+  width: 20px;
+  position: absolute;
+  left: 11px;
+  fill: none;
+  stroke: gray;
+  stroke-width: 2px;
+  stroke-linecap: round;
+  stroke-dasharray: 18;
+  stroke-dashoffset: 18;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+label {
+  cursor: pointer;
+}
+
+.btn {
+  height: 15px;
+  width: 15px;
+  position: absolute;
+  border: 2px solid gray;
+  border-radius: 50%;
+  left: 10px;
+  transition: all 0.3s 0.3s;
+  z-index: 2;
+}
+
+.text {
+  transition: all 0.2s;
+}
+
+.checkbox:checked ~ .task-details .text {
+  color: rgb(165, 165, 165);
+}
+
+.checkbox:checked ~ .task-details {
+  height: 0;
+  min-height: 0px;
+}
+
+.checkbox:checked ~ .task-details .description,
+.checkbox:checked ~ .task-details .due-date {
+  opacity: 0;
+  visibility: none;
+}
+
+.checkbox:checked ~ .btn {
+  opacity: 0;
+  transform: scale(1.5);
+  transition: all 0.3s;
+}
+
+.checkbox:checked ~ .check {
+  stroke-dashoffset: 0;
+  transition: all 0.3s 0.2s;
+}
+
+#form {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  visibility: hidden;
+  scale: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgb(255, 244, 183);
+  padding: 20px;
+  gap: 10px;
+  transition: all 0.2s ease-in-out;
+  transform-origin: top left;
+  box-shadow: 5px 15px 30px rgba(0, 0, 0, 0.513);
+  z-index: 99;
+  label {
+    margin-top: 10px;
+    font-weight: 600;
+  }
+  input,
+  textarea {
+    padding: 5px 10px;
+  }
+  textarea {
+    min-width: 400px;
+    max-width: 800px;
+    min-height: 200px;
+    max-height: 300px;
+  }
+  .submit-btn {
+    padding: 7px;
+    background-color: rgb(228, 103, 66);
+    color: whitesmoke;
+    font-weight: 500;
+    outline: none;
+    border: none;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.382);
+    cursor: pointer;
+    display: none;
+  }
+  .submit-btn:hover {
+    filter: brightness(1.1);
+  }
+  .submit-btn.active {
+    display: block;
+  }
+}
+
+#form.active {
+  opacity: 1;
+  visibility: visible;
+  scale: 1;
+}
+
+.add-task {
+  position: absolute;
+  bottom: 10px;
+  padding: 15px 20px;
+  text-align: left;
+  width: 300px;
+  border-radius: 30px;
+  border: none;
+  color: #fff;
+  background-color: black;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 16px;
+  gap: 20px;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.467);
+  .plus {
+    font-size: 1.5rem;
+    transition: all 0.2s;
+  }
+}
+
+.rotate {
+  transform: rotate(45deg);
+}
+
+.add-task:hover {
+  background-color: rgb(45, 45, 45);
+}
+
+.confirm-box {
+  z-index: 1000;
+  background-color: rgba(242, 95, 35, 1);
+  position: absolute;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  gap: 10px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.438);
+  button {
+    padding: 5px 15px;
+    cursor: pointer;
+  }
+}
+
+.confirm-box.active {
+  display: flex;
+}
